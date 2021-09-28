@@ -7,7 +7,7 @@ Synopsis
 --------
 With this library, you will be able to write parts of your ZX-Spectrum program using C and include them into the ASM source, when using SjAsmPlus as a build tool. You will need an SDCC or Z88DK (for ZSDCC) to translate C code into ASM code, but a machine code generation can be done completely by SjAsmPlus, without using SDCC or Z88DK toolchains.
 
-Symbols defined in C code can be accessed from the rest of the code via underscore-prefixed labels. And vice versa: underscore-prefixed labels can be accessed from C code using 'extern' declaration. Also, there is a special mechanism to pass 'defines' into the C code.
+Symbols defined in C code can be accessed from the rest of the code as usual labels. And vice versa: labels can be accessed from C code using 'extern' declaration. Also, there is a special mechanism to pass 'defines' into the C code.
 
 NOTE: Although this system proved to be working, it is heavily dependant on the undocumented implementation details of both SjAsmPlus and SDCC/ZSDCC that can change in the future. USE THIS LIBRARY AT YOUR OWN RISK!
 

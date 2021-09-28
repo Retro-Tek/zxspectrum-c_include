@@ -1,4 +1,4 @@
-; The C code performs arithmetic operation on variables '_arg1' and '_arg2' and stores result into '_res.'
+; The C code performs arithmetic operation on variables 'arg1' and 'arg2' and stores result into 'res.'
 ; Result then checked for correctness. If everything is OK then GREEN border is shown, otherwise - the RED one.
 
                     DEVICE ZXSPECTRUM48
@@ -25,15 +25,15 @@
 
 start               DI
 
-                    CALL _my_c_proc
+                    CALL my_c_proc
 
                     IF IS_16BIT
-                        LD HL,(_res)
+                        LD HL,(res)
                         LD DE,EXPECTED_RESULT
                         OR A
                         SBC HL,DE
                     ELSE
-                        LD A,(_res)
+                        LD A,(res)
                         CP EXPECTED_RESULT
                     ENDIF
 
@@ -45,10 +45,10 @@ start               DI
                     HALT
 
                     ; Labels that starts with underscore can be accessed from C code using extern declaration (with underscore omitted).
-_op                 DB OPSYMBOL
-_arg1               VALUE_TYPE ARGUMENT1_VALUE
-_arg2               VALUE_TYPE ARGUMENT2_VALUE
-_res                VALUE_TYPE 0
+op                  DB OPSYMBOL
+arg1                VALUE_TYPE ARGUMENT1_VALUE
+arg2                VALUE_TYPE ARGUMENT2_VALUE
+res                 VALUE_TYPE 0
 
                     c_define "IS_16BIT" = IS_16BIT
                     c_include "example.c"

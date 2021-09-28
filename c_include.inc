@@ -147,9 +147,10 @@
                             end
                         ENDLUA
 
-                        DEFINE MODULE _c_skip_arg
-                        DEFINE XREF _c_skip_arg
-                        DEFINE XDEF _c_skip_arg
+                        DEFINE _ ; Somehow, this hack will strip a single leading underscore from every identifier.
+                        DEFINE MODULE c_skip1
+                        DEFINE XREF c_skip1
+                        DEFINE XDEF c_skip1
 
                         OPT push --syntax=aF
 
@@ -158,6 +159,7 @@
 
                         OPT pop
 
+                        UNDEFINE _
                         UNDEFINE MODULE
                         UNDEFINE XREF
                         UNDEFINE XDEF
@@ -169,7 +171,7 @@
                         UNDEFINE _C_INCLUDE_FILENAME!
                     ENDM
 
-                    MACRO _c_skip_arg ARG
+                    MACRO c_skip1 ARG
                     ENDM
 
                     MACRO .optsdcc ARG
