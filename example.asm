@@ -44,7 +44,6 @@ start               DI
                     OUT (#FE),A
                     HALT
 
-                    ; Labels that starts with underscore can be accessed from C code using extern declaration (with underscore omitted).
 op                  DB OPSYMBOL
 arg1                VALUE_TYPE ARGUMENT1_VALUE
 arg2                VALUE_TYPE ARGUMENT2_VALUE

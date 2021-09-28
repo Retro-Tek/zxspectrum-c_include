@@ -17,9 +17,9 @@ Example
 ```
     include "c_include.inc"
     ...
-    call _my_proc
+    call my_proc
     ...
-_some_var dw 0
+some_var dw 0
     ...
     c_define "IS_16BIT"
     c_define "SOME_VALUE" = 123
