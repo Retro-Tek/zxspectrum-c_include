@@ -21,12 +21,18 @@
 ; SOFTWARE.
 
 ;                    DEFINE C_USE_ZSDCC
-;                    DEFINE C_COMPILER_ARGS
+                    DEFINE C_COMPILER_ARGS --fsigned-char
 
                     LUA PASS1
                         sj.shellexec('mkdir -p tmp')
 
                         _c_defines = {}
+
+                        for i, reg in ipairs({'a','b','c','d','e','h','l','i','r','xl','ixl','xh','ixh','yl','iyl','yh','iyh','af','bc','de','hl','sp','ix','iy'}) do
+                            _c_defines[reg] = reg..'_'
+                            reg = string.upper(reg)
+                            _c_defines[reg] = reg..'_'
+                        end
 
                         function _c_define(name, value)
                             name = string.gsub(name, '^"', '')
@@ -119,6 +125,11 @@
                             outfile = 'tmp/'..file..'.asm'
 
                             if tonumber(sj.get_define('__PASS__')) == 1 then
+                                slash = string.find(file, '/[^/]*$')
+                                if slash and slash>1 then
+                                    sj.shellexec('mkdir -p "tmp/'..string.sub(file, 1, slash-1)..'"')
+                                end
+
                                 cmd = sj.get_define('C_USE_ZSDCC') and 'zsdcc' or 'sdcc'
                                 cmd = cmd..' -S -mz80 --asm=z80asm'
                                 cmd = cmd..' --oldralloc --reserve-regs-iy' -- Prevents SDCC from producing broken code (hopefully).
@@ -141,9 +152,10 @@
                                 print('Running: '..cmd)
                                 sj.shellexec(cmd)
                                 sj.shellexec('sed -i "s/^\\.//" tmp/out.asm')
-                                sj.shellexec('cp tmp/out.asm '..outfile)
+                                sj.shellexec('sed -i "s/ ~ \\$FF\\>/ \\& 255/" tmp/out.asm') -- fixing SDCC bug
+                                sj.shellexec('cp tmp/out.asm "'..outfile..'"')
                             else
-                                sj.shellexec('cp '..outfile..' tmp/out.asm')
+                                sj.shellexec('cp "'..outfile..'" tmp/out.asm')
                             end
                         ENDLUA
 

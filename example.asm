@@ -37,9 +37,9 @@ start               DI
                         CP EXPECTED_RESULT
                     ENDIF
 
-                    LD A,8+4 ; Green
+                    LD A,4 ; Green
                     JR Z,$+4 ; ZF=1 - ok / ZF=0 - error
-                    LD A,8+2 ; Red
+                    LD A,2 ; Red
 
                     OUT (#FE),A
                     HALT
