@@ -1,4 +1,13 @@
-;  This code was extracted from SDCC.
+___sdcc_call_hl     IFUSED
+                    JP (HL)
+                    ENDIF
+
+___sdcc_call_iy     IFUSED
+                    JP (IY)
+                    ENDIF
+
+
+;  The code below was extracted from SDCC.
 ;  Copyright owners are mentioned before corresponding code parts.
 
 ;--------------------------------------------------------------------------
