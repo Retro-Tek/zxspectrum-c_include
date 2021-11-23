@@ -49,7 +49,6 @@ Warnings & Limitations:
 * Generally, operability of this code heavily depends on the specific behavior of SjAsmPlus and SDCC compilers, (particularly on the ability of SjAsmPlus to understand z80asm syntax), so there are ABSOLUTELY NO GUARANTEES that it will not break with the next update of any of them, nor that it could be fixed. Currently only SjAsmPlus-v1.18.3 + SDCC-4.1.0/ZSDCC-4.0.7 (all Linux) were tested.
 * Only 8-bit and 16-bit integers are fully supported.
 * Floating-point numbers are not (and will never be) supported.
-* Global variables initialization will not work. They are always set to zero.
 * Functions defined with 'static' modifier are still visible from everywhere (just like when ordinary including C sources).
 * CRT0 is minimalistic and contains only MUL/DIV/MOD routines for 8-bit/16-bit integers. This code was extracted from SDCC. See a note about licensing issues below.
 

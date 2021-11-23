@@ -151,8 +151,16 @@
 
                                 print('Running: '..cmd)
                                 sj.shellexec(cmd)
-                                sj.shellexec('sed -i "s/^\\.//" tmp/out.asm')
-                                sj.shellexec('sed -i "s/ ~ \\$FF\\>/ \\& 255/" tmp/out.asm') -- fixing SDCC bug
+                                -- Stripping leading dot`s from labels
+                                sj.shellexec([[sed -i 's/^\.//' tmp/out.asm]])
+                                -- Fixing SDCC bugs
+                                sj.shellexec([[sed -i 's/ ~ \$FF\>/ \& 255/' tmp/out.asm]])
+                                sj.shellexec([[sed -i 's/\<DEFB \(\$[0-9A-Fa-f]\{4\}\)\>/DEFW \1/' tmp/out.asm]])
+                                sj.shellexec([[sed -i 's/\<DEFB \([^\$].*\)\>/DEFW \1/' tmp/out.asm]]) -- assuming labels to be 16-bit
+                                -- Fixing initialized data
+                                sj.shellexec([[sed -i -z 's/[ \t]*;[ \t]*Area[ \t]\+INITIALIZED[ \t]*\n[^;]*/ WHILE 0\n& EDUP\n/' tmp/out.asm]]) -- IF/ENDIF will not compile (SjAsmPlus bug)
+                                sj.shellexec([[sed -i 's/^__xinit_//' tmp/out.asm]])
+                                -- Done
                                 sj.shellexec('cp tmp/out.asm "'..outfile..'"')
                             else
                                 sj.shellexec('cp "'..outfile..'" tmp/out.asm')
