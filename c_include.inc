@@ -132,7 +132,7 @@
 
                                 cmd = sj.get_define('C_USE_ZSDCC') and 'zsdcc' or 'sdcc'
                                 cmd = cmd..' -S -mz80 --asm=z80asm'
-                                cmd = cmd..' --oldralloc --reserve-regs-iy' -- Prevents SDCC from producing broken code (hopefully).
+                                cmd = cmd..' --reserve-regs-iy' -- Prevents SDCC from producing broken code (hopefully).
 
                                 args = sj.get_define('C_COMPILER_ARGS')
                                 if args then

@@ -1,9 +1,9 @@
 ___sdcc_call_hl     IFUSED
-                    JP (HL)
+                        JP (HL)
                     ENDIF
 
 ___sdcc_call_iy     IFUSED
-                    JP (IY)
+                        JP (IY)
                     ENDIF
 
 
